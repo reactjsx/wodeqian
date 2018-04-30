@@ -5,3 +5,8 @@
 .dimmed.dimmable > .ui.modals.dimmer.visible {
   display: flex !important;
 }
+
+body {
+  background-image: url('./images/yutabella.png');
+  background-size: cover;
+}
