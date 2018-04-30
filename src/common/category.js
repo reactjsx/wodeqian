@@ -1,0 +1,95 @@
+const category = {
+  'Outcome': [
+    {
+      text: 'Convenient Store',
+      value: 'Convenient Store'
+    },
+    {
+      text: 'Supermarket',
+      value: 'Supermarket'
+    },
+    {
+      text: 'Shopping',
+      value: 'Shopping'
+    },
+    {
+      text: 'Transportation',
+      value: 'Transportation'
+    },
+    {
+      text: 'Eating Out',
+      value: 'Eating Out'
+    },
+    {
+      text: 'House Rent',
+      value: 'House Rent'
+    },
+    {
+      text: 'Electric Bill',
+      value: 'Electric Bill'
+    },
+    {
+      text: 'Television Bill',
+      value: 'Television Bill'
+    },
+    {
+      text: 'Gas Bill',
+      value: 'Gas Bill'
+    },
+    {
+      text: 'Water Bill',
+      value: 'Water Bill'
+    },
+    {
+      text: 'Internet Bill',
+      value: 'Internet Bill'
+    },
+    {
+      text: 'Phone Bill',
+      value: 'Phone Bill'
+    },
+    {
+      text: 'Web Service',
+      value: 'Web Service'
+    },
+    {
+      text: 'Education',
+      value: 'Education'
+    },
+    {
+      text: 'Allowance',
+      value: 'Allowance'
+    },
+    {
+      text: 'Transform To',
+      value: 'Transform To'
+    },
+    {
+      text: 'Debt Pay',
+      value: 'Debt Pay'
+    }
+  ],
+  'Income': [
+    {
+      text: 'Salary',
+      value: 'Salary'
+    },
+    {
+      text: 'Freelance',
+      value: 'Freelance'
+    },
+    {
+      text: 'Company Payback',
+      value: 'Company Payback'
+    },
+    {
+      text: 'Transform From',
+      value: 'Transform From'
+    },
+    {
+      text: 'Borrow',
+      value: 'Borrow'
+    }
+  ]
+};
+export default category;
