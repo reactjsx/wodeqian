@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Route, NavLink, Redirect } from 'react-router-dom';
 import { Button, Segment, Header, Loader } from 'semantic-ui-react';
-import { getTransactions, createTransaction, createWallet, isSignedIn, getCurrentDate, deleteTransaction } from '../utils/helper';
+import { getTransactions, createTransaction, updateTransaction, createWallet, isSignedIn, getCurrentDate, deleteTransaction } from '../utils/helper';
 import AddTransactionPanel from './AddTransactionPanel';
 import Wallet from './Wallet';
 import AddWalletForm from './AddWalletForm';
@@ -68,6 +68,22 @@ class WalletList extends Component {
       .then(() => this.forceUpdate())
       .catch((e) => console.error(e));
   }
+
+  handleUpdateTransactionClick = (transaction) => {
+    updateTransaction(transaction)
+      .then(res => res.json())
+      .then(res => {
+        if (res.error) {
+          this.setState({ redirectSignIn: true });
+          throw new Error('Response Error');
+        }
+      })
+      .then(() => getTransactions(wallets => {
+        this.setState({ wallets });
+      }))
+      .then(() => this.forceUpdate())
+      .catch((e) => console.error(e));
+  }
   
   handleTrashClick = (transaction) => {
     deleteTransaction(transaction)
@@ -102,7 +118,7 @@ class WalletList extends Component {
     }
     const currentDate = getCurrentDate();
     if (this.state.wallets.length > 0) {
-      const walletNames = this.state.wallets.map(wallet => (
+      const walletBar = this.state.wallets.map(wallet => (
         <NavLink
           className='item'
           key={wallet._id}
@@ -117,7 +133,7 @@ class WalletList extends Component {
             <div className='header item'>
               {this.state.nickname}
             </div>
-            {walletNames}
+            {walletBar}
             <div className='item'>
               <AddWalletForm
                 onAddWalletClick={this.handleAddWalletClick}
@@ -147,15 +163,16 @@ class WalletList extends Component {
                 return transaction.cost;
               });
               const totalConsumption = costs.reduce((a, b) => a + b, 0);
+              const walletNames = this.state.wallets.map(w => (
+                {
+                  text: w.name,
+                  value: w.name
+                }
+              ))
               return (
               <Segment raised>
                 <AddTransactionPanel
-                  walletNames={this.state.wallets.map(w => (
-                    {
-                      text: w.name,
-                      value: w.name
-                    }
-                  ))}
+                  walletNames={walletNames}
                   walletId={wallet._id}
                   walletName={wallet.name}
                   onAddTransactionClick={this.handleAddTransactionClick}
@@ -170,8 +187,10 @@ class WalletList extends Component {
                   ))}
                   currency={currencies.filter(c => c.value === wallet.currency)[0].code}
                   walletName={wallet.name}
+                  walletNames={walletNames}
                   walletId={wallet._id}
                   onTrashClick={this.handleTrashClick}
+                  onUpdateTransactionClick={this.handleUpdateTransactionClick}
                 />
                 </Segment>
               );

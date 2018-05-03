@@ -58,20 +58,7 @@ class AddTransactionForm extends Component {
     const errors = this.validate(this.state.transaction);
     this.setState({ errors });
     if (Object.keys(errors).length === 0) {
-      const transaction = { ...this.state.transaction };
-      this.setState({
-        transaction: {
-          wallet: '',
-          name: '',
-          type: '',
-          category: '',
-          cost: '',
-          year: '',
-          month: '',
-          day: ''
-        }
-      });
-      this.props.onAddTransactionClick(transaction);
+      this.props.onAddTransactionClick(this.state.transaction);
     }
   }
   
@@ -218,7 +205,7 @@ class AddTransactionForm extends Component {
 AddTransactionForm.propTypes = {
   walletId: PropTypes.string.isRequired,
   walletName: PropTypes.string.isRequired,
-  walletNames: PropTypes.object.isRequired,
+  walletNames: PropTypes.array.isRequired,
   currentDate: PropTypes.object.isRequired,
   onAddTransactionClick: PropTypes.func.isRequired,
   onCancelClick: PropTypes.func.isRequired,

@@ -47,7 +47,7 @@ class AddTransactionPanel extends Component {
 AddTransactionPanel.propTypes = {
   walletId: PropTypes.string.isRequired,
   walletName: PropTypes.string.isRequired,
-  walletNames: PropTypes.object.isRequired,
+  walletNames: PropTypes.array.isRequired,
   currentDate: PropTypes.object.isRequired,
   onAddTransactionClick: PropTypes.func.isRequired
 }

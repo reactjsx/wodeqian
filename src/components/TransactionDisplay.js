@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import UpdateTransactionForm from './UpdateTransactionForm';
 
 const TransactionDisplay = (props) => {
   const color = props.type === 'Income' ? 'steelblue' : 'red';
@@ -17,11 +18,16 @@ const TransactionDisplay = (props) => {
           color='red'
           onClick={props.onTrashClick}
         />
-        <Button
-          basic
-          icon='pencil'
-          color='green'
-          onClick={props.onUpdateClick}
+        <UpdateTransactionForm
+          id={props.id}
+          name={props.name}
+          type={props.type}
+          category={props.category}
+          cost={props.cost}
+          year={props.year}
+          month={props.month}
+          day={props.day}
+          onUpdateTransactionClick={props.onUpdateTransactionClick}
         />
       </Table.Cell>
     </Table.Row>
@@ -29,16 +35,17 @@ const TransactionDisplay = (props) => {
 };
 
 TransactionDisplay.propTypes = {
+  id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   currency: PropTypes.string.isRequired,
   cost: PropTypes.number.isRequired,
-  year: PropTypes.string.isRequired,
-  month: PropTypes.string.isRequired,
-  day: PropTypes.string.isRequired,
+  year: PropTypes.number.isRequired,
+  month: PropTypes.number.isRequired,
+  day: PropTypes.number.isRequired,
   onTrashClick: PropTypes.func.isRequired,
-  onUpdateClick: PropTypes.func.isRequired
+  onUpdateTransactionClick: PropTypes.func.isRequired
 }
 
 export default TransactionDisplay;

@@ -6,6 +6,10 @@
   display: flex !important;
 }
 
+.ui.modal {
+  margin-top: 0px !important;
+}
+
 body {
   background-image: url('./images/yutabella.png');
   background-size: cover;

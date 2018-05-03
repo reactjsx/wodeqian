@@ -83,6 +83,19 @@ export function createTransaction(data) {
   });
 }
 
+export function updateTransaction(data) {
+  const token = localStorage.getItem('wodeqian-token');
+  const url = `https://tranquil-bastion-52140.herokuapp.com/api/transactions?token=${token}`;
+  return fetch(url, {
+    method: 'put',
+    body: JSON.stringify(data),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    }
+  });
+}
+
 export function createWallet(data) {
   const token = localStorage.getItem('wodeqian-token');
   const url = `https://tranquil-bastion-52140.herokuapp.com/api/wallets?token=${token}`;

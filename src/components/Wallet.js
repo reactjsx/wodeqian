@@ -13,9 +13,10 @@ class Wallet extends Component {
     this.props.onTrashClick(transaction);
   }
   render() {
-    const transactions = this.props.transactions.sort((a, b) => (a.day - b.day)).map(transaction => (
+    const transactions = this.props.transactions.sort((a, b) => (b.day - a.day)).map(transaction => (
       <TransactionDisplay
         key={transaction._id}
+        id={transaction._id}
         name={transaction.name}
         type={transaction.type}
         category={transaction.category}
@@ -25,6 +26,7 @@ class Wallet extends Component {
         cost={transaction.cost}
         currency={this.props.currency}
         onTrashClick={() => this.handleTrashClick(transaction._id)}
+        onUpdateTransactionClick={this.props.onUpdateTransactionClick}
       />
     ));
   
@@ -51,8 +53,9 @@ Wallet.propTypes = {
   walletId: PropTypes.string.isRequired,
   walletName: PropTypes.string.isRequired,
   onTrashClick: PropTypes.func.isRequired,
-  transactions: PropTypes.object.isRequired,
-  currency: PropTypes.string.isRequired
+  transactions: PropTypes.array.isRequired,
+  currency: PropTypes.string.isRequired,
+  onUpdateTransactionClick: PropTypes.func.isRequired
 }
 
 export default Wallet;
