@@ -6,6 +6,7 @@ import AddTransactionPanel from './AddTransactionPanel';
 import Wallet from './Wallet';
 import AddWalletForm from './AddWalletForm';
 import currencies from '../common/currencies';
+import months from '../common/months';
 
 class WalletList extends Component {
   state = {
@@ -181,6 +182,7 @@ class WalletList extends Component {
                 }
               ));
               const currencyCode = currencies.filter(c => c.value === wallet.currency)[0].code;
+              const monthString = months.filter(m => m.value === Number(match.params.month))[0].code;
               return (
               <Segment raised>
                 <AddTransactionPanel
@@ -191,8 +193,11 @@ class WalletList extends Component {
                   currentDate={currentDate}
                 />
 
+                <Header textAlign='center' color='blue'>
+                  {`Transactions of ${monthString}`}
+                </Header>
                 <Header textAlign='center' color='red' >
-                  Current month's Consumption: {currencyCode} {thisMonthConsumtion}
+                  Consumption: {currencyCode} {thisMonthConsumtion}
                 </Header>
                 <Header textAlign='center' color='green' >
                   Current Balance: {currencyCode} {wallet.initBalance - totalConsumption}
