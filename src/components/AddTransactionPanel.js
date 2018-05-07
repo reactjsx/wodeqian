@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import AddTransactionForm from './AddTransactionForm';
 
@@ -24,11 +24,15 @@ class AddTransactionPanel extends Component {
   render() {
     if (this.state.displayAddButton) {
       return (
+        <Grid textAlign='center'>
+        <Grid.Row>
         <Button
           icon='plus'
           color='green'
           onClick={this.handleAddButtonClick}
         />
+        </Grid.Row>
+        </Grid>
       );
     }
     return (

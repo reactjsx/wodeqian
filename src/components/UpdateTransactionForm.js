@@ -176,7 +176,7 @@ class UpdateTransactionForm extends Component {
         </Modal.Content>
         <Modal.Actions>
           <Button color='green' onClick={this.handleUpdateTransactionClick} inverted>
-            <Icon name='plus' /> Update
+            <Icon name='check' /> Update
           </Button>
           <Button color='red' onClick={this.handleCloseClick} inverted>
             <Icon name='close' /> Close

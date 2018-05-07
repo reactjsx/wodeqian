@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route, NavLink, Redirect } from 'react-router-dom';
-import { Button, Segment, Header, Loader } from 'semantic-ui-react';
+import { Route, NavLink, Link, Redirect } from 'react-router-dom';
+import { Button, Segment, Header, Loader, Grid } from 'semantic-ui-react';
 import { getTransactions, createTransaction, updateTransaction, createWallet, isSignedIn, getCurrentDate, deleteTransaction } from '../utils/helper';
 import AddTransactionPanel from './AddTransactionPanel';
 import Wallet from './Wallet';
@@ -163,12 +163,24 @@ class WalletList extends Component {
                 return transaction.cost;
               });
               const totalConsumption = costs.reduce((a, b) => a + b, 0);
+
+              const currentMonthTransactions = wallet.transactions.filter(transaction => (
+                transaction.month === Number(match.params.month)
+              ));
+              const thisMonthCosts = currentMonthTransactions.map(transaction => {
+                if (transaction.type === 'Income') {
+                  return 0;
+                }
+                return transaction.cost;
+              });
+              const thisMonthConsumtion = thisMonthCosts.reduce((a, b) => a + b, 0);
               const walletNames = this.state.wallets.map(w => (
                 {
                   text: w.name,
                   value: w.name
                 }
-              ))
+              ));
+              const currencyCode = currencies.filter(c => c.value === wallet.currency)[0].code;
               return (
               <Segment raised>
                 <AddTransactionPanel
@@ -178,14 +190,48 @@ class WalletList extends Component {
                   onAddTransactionClick={this.handleAddTransactionClick}
                   currentDate={currentDate}
                 />
-                <Header textAlign='center' color='green' >
-                  Current Balance: {wallet.initBalance - totalConsumption}
+
+                <Header textAlign='center' color='red' >
+                  Current month's Consumption: {currencyCode} {thisMonthConsumtion}
                 </Header>
+                <Header textAlign='center' color='green' >
+                  Current Balance: {currencyCode} {wallet.initBalance - totalConsumption}
+                </Header>
+
+                <Grid textAlign='center' columns={3}>
+                  <Grid.Row columns={3}>
+                    <Grid.Column>
+                      <Link
+                        to={`/wallets/${wallet._id}/${Number(match.params.month) - 1}`}
+                      >
+                        <Button
+                          basic
+                          color='blue'
+                        >
+                          Previous
+                        </Button>
+                      </Link>
+                    </Grid.Column>
+                    <Grid.Column>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Link
+                        to={`/wallets/${wallet._id}/${Number(match.params.month) + 1}`}
+                      >
+                        <Button
+                          basic
+                          color='blue'
+                        >
+                          Next
+                        </Button>
+                      </Link>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+
                 <Wallet
-                  transactions={wallet.transactions.filter(transaction => (
-                    transaction.month === Number(match.params.month)
-                  ))}
-                  currency={currencies.filter(c => c.value === wallet.currency)[0].code}
+                  transactions={currentMonthTransactions}
+                  currency={currencyCode}
                   walletName={wallet.name}
                   walletNames={walletNames}
                   walletId={wallet._id}
