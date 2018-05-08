@@ -61,8 +61,8 @@ const category = {
       value: 'Allowance'
     },
     {
-      text: 'Transform To',
-      value: 'Transform To'
+      text: 'Transfer To',
+      value: 'Transfer To'
     },
     {
       text: 'Debt Pay',
@@ -83,8 +83,8 @@ const category = {
       value: 'Company Payback'
     },
     {
-      text: 'Transform From',
-      value: 'Transform From'
+      text: 'Transfer From',
+      value: 'Transfer From'
     },
     {
       text: 'Borrow',

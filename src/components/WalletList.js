@@ -169,7 +169,7 @@ class WalletList extends Component {
                 transaction.month === Number(match.params.month)
               ));
               const thisMonthCosts = currentMonthTransactions.map(transaction => {
-                if (transaction.type === 'Income') {
+                if (transaction.type === 'Income' || transaction.category === 'Transfer To') {
                   return 0;
                 }
                 return transaction.cost;
