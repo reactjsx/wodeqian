@@ -53,6 +53,10 @@ const category = {
       value: 'Web Service'
     },
     {
+      text: 'Public Service',
+      value: 'Public Service'
+    },
+    {
       text: 'Education',
       value: 'Education'
     },

@@ -15,7 +15,7 @@ class WalletList extends Component {
     nickname: ''
   }
   
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (!localStorage.getItem('wodeqian-token')) {
       this.setState({ redirectSignIn: true });
     }
@@ -32,8 +32,8 @@ class WalletList extends Component {
       } else {
         this.setState({ nickname: res.nickname });
       }
-    }).then(() => getTransactions(wallets => {
-      this.setState({ wallets });
+    }).then(() => getTransactions(data => {
+      this.setState({ wallets: data.wallets });
     }))
       .catch(e => console.error(e));
   }

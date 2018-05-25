@@ -14,7 +14,7 @@ class SignIn extends Component {
     errors: {}
   };
   
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (!localStorage.getItem('wodeqian-token')) {
       this.setState({ isSignedIn: false });    }
   }
